@@ -7,31 +7,31 @@ using System.Threading.Tasks;
 namespace Homework_1._4
 {
     class Player
-{
-    public string Name { get; private set; }
-    public int Age { get; private set; }
-
-    private Movement _movement;
-    private Weapon _weapon;
-
-    public Player(string name, int age, Movement movement, Weapon weapon)
     {
-        Name = name;
-        Age = age;
+        public string Name { get; private set; }
+        public int Age { get; private set; }
 
-        _movement = movement;
-        _weapon = weapon;
-    }
+        private Movement _movement;
+        private Weapon _weapon;
 
-    public void Move() => _movement.Run();
-    public void Attack()
-    {
-        if (_weapon.IsReloading())
+        public Player(string name, int age, Movement movement, Weapon weapon)
         {
-            _weapon.Attack();
+            Name = name;
+            Age = age;
+
+            _movement = movement;
+            _weapon = weapon;
+        }
+
+        public void Move() => _movement.Run();
+        public void Attack()
+        {
+            if (_weapon.IsReloading())
+            {
+                _weapon.Attack();
+            }
         }
     }
-}
 
     class Weapon
     {
