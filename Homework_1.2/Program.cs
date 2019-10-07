@@ -7,6 +7,7 @@ namespace Homework_1._2
     class Pointer
     {
         static private int _idNewPointer = 0;
+
         public int Id { get; private set; }
         public int Coordinate_x { get; private set; }
         public int Coordinate_y { get; private set; }
@@ -24,6 +25,7 @@ namespace Homework_1._2
         {
             IsAlive = false;
         }
+
         public void DifferentOrDeath(Pointer pointer)
         {
             if (Coordinate_x == pointer.Coordinate_x && Coordinate_y == pointer.Coordinate_y)
