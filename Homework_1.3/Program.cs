@@ -8,30 +8,31 @@ namespace Homework_1._3
 {
     class Bag
     {
-        private List<Item> Items;
-        public int MaxWeidth { get; private set; }
+        private List<Item> _items;
+        private uint _maxWeidth;
 
         public Bag(List<Item> items, int maxWeidth)
         {
-            Items = items;
+            _items = items;
 
             if (maxWeidth <= 0)
                 throw new InvalidOperationException();
 
-            MaxWeidth = maxWeidth;
+            _maxWeidth = (uint)maxWeidth;
         }
 
-        public IReadOnlyCollection<Item> GetAllItems() => Items.AsReadOnly();
+        public int MaxWeidth() => (int)_maxWeidth;
+        public IReadOnlyCollection<Item> GetAllItems() => _items.AsReadOnly();
 
         public void AddItem(string name, int count)
         {
-            int currentWeidth = Items.Sum(item => item.Count);
-            Item targetItem = Items.FirstOrDefault(item => item.Name == name);
+            int currentWeidth = _items.Sum(item => item.Count());
+            Item targetItem = _items.FirstOrDefault(item => item.Name == name);
 
             if (targetItem == null)
                 throw new InvalidOperationException();
 
-            if (currentWeidth + count > MaxWeidth)
+            if (currentWeidth + count > _maxWeidth)
                 throw new InvalidOperationException();
 
             targetItem.Add(count);
@@ -42,14 +43,25 @@ namespace Homework_1._3
     class Item
     {
         public string Name { get; private set; }
-        public int Count { get; private set; }
+        private uint _count;
 
         public Item(string name, int count)
         {
             Name = name;
-            Count = count;
+            if(count <= 0)
+                throw new InvalidOperationException();
+
+            _count = (uint)count;
         }
 
-        public void Add(int count) => Count += count;
+        public int Count() => (int)_count;
+
+        public void Add(int count)
+        {
+            if(count <= 0)
+                throw new InvalidOperationException();
+
+            _count = (uint)count;
+        }
     }
 }
